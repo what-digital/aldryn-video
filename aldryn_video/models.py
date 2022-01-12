@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import re
-from django.utils.six.moves.urllib.parse import urlparse
+from six.moves.urllib.parse import urlparse
 
 from django.core.exceptions import ValidationError
 from django.db import models
@@ -8,14 +8,9 @@ from django.utils.translation import ugettext_lazy as _
 
 from cms.models.pluginmodel import CMSPlugin
 
-from jsonfield import JSONField
-
 from .utils import build_html_iframe, get_embed_code, get_player_url
 
-from django.utils.encoding import python_2_unicode_compatible
 
-
-@python_2_unicode_compatible
 class OEmbedVideoPlugin(CMSPlugin):
     # exact provide name from youtube oembed response
     YOUTUBE = 'YouTube'
@@ -30,7 +25,7 @@ class OEmbedVideoPlugin(CMSPlugin):
     auto_play = models.BooleanField(_('auto play'), default=False)
     loop_video = models.BooleanField(_('loop'), help_text=_('when true, the video repeats itself when over.'), default=False)
     # cached oembed data
-    oembed_data = JSONField(null=True)
+    oembed_data = models.JSONField(null=True)
     custom_params = models.CharField(_('custom params'), help_text=_('define custom params (e.g. "start=10&end=50")'), max_length=200, blank=True)
 
     def __str__(self):

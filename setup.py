@@ -7,7 +7,6 @@ from aldryn_video import __version__
 REQUIREMENTS = [
     'aldryn-boilerplates>=0.6',
     'micawber',
-    'jsonfield',
     'beautifulsoup4',
 ]
 
